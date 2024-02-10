@@ -25,6 +25,7 @@ import { storage, zustandStorage } from '@/stores/StorageMMK';
 const BoardScreen = (props: NativeStackScreenProps<RootStackProps>) => {
   const [height, setHeight] = useState<number>(0);
   const [testerName, setTesterName] = useState<string>();
+  const [error,setError] = useState<string | null>();
   const styles = useStyles();
   const theme = useTheme();
   const storeBoard = useStoreBoard();
@@ -95,7 +96,13 @@ useEffect(() => {
         title={'Tester name'}
         onCancel={storageDialog.onClose}
         onPress={() => {
+          if(!testerName?.length) {
+          setError("Please enter your name!")
+            return ;
+          }
+          setError(null);
           storageQuestion.setTesterName(testerName!);
+          storageDialog.onClose();
           setTimeout(() => {
             storageQuestion.setLoading();
             props.navigation.navigate("Question");
@@ -105,8 +112,15 @@ useEffect(() => {
         <TextInput
           label="Name"
           value={testerName}
-          onChangeText={text => setTesterName(text)}
+          mode="outlined"
+          error={!!error}
+          onChangeText={text => {
+            setTesterName(text)
+          }}
         />
+        {error && <Text style={{
+          color:theme.colors.error
+        }}>{error}</Text>}
       </DialogComponent>
     </SafeAreaView>
   );

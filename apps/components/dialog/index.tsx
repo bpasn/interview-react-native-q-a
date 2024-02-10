@@ -64,10 +64,7 @@ const DialogComponent = ({
                                 height: 45,
                                 width: 80
                             }}
-                            onPress={() =>{
-                                onPress?.();
-                                onDismiss();
-                            }} label={"Submit"} />
+                            onPress={onPress} label={"Submit"} />
                     </View>
                 </Dialog.Actions>
             </Dialog>
