@@ -1,0 +1,604 @@
+{
+    "questions": [
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Entertainment: Music",
+            "question": "Which rap group released the album 'Straight Outta Compton'?",
+            "correctAnswer": "N.W.A",
+            "chooses": [
+                "Wu-Tang Clan",
+                "Run-D.M.C.",
+                "Beastie Boys"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Entertainment: Video Games",
+            "question": "Who is Sonic's sidekick?",
+            "correctAnswer": "Tails",
+            "chooses": [
+                "Shadow",
+                "Amy",
+                "Knuckles"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Entertainment: Video Games",
+            "question": "Which gaming series includes 'The Diabolical Box' and 'The Curious Village'?",
+            "correctAnswer": "Professor Layton",
+            "chooses": [
+                "Persona",
+                "Etrian Odyssey",
+                "Sam &amp; Max"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Entertainment: Video Games",
+            "question": "Which of these is NOT a playable character in the 2016 video game Overwatch?",
+            "correctAnswer": "Invoker",
+            "chooses": [
+                "Mercy",
+                "Winston",
+                "Zenyatta"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Entertainment: Video Games",
+            "question": "Which of these characters was almost added into Super Smash Bros. Melee, but not included as the game was too far in development?",
+            "correctAnswer": "Solid Snake",
+            "chooses": [
+                "Pit",
+                "Meta Knight",
+                "R.O.B."
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Entertainment: Video Games",
+            "question": "Who is the main character of the game Half-Life: Opposing Force?",
+            "correctAnswer": "Adrian Shephard",
+            "chooses": [
+                "Gordon Freeman",
+                "Alyx Vance",
+                "Barney Calhoun"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Entertainment: Music",
+            "question": "What's the most common time signature for rock songs?",
+            "correctAnswer": "4/4",
+            "chooses": [
+                "1/2",
+                "8/12",
+                "2/4"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Entertainment: Video Games",
+            "question": "In Telltale Games' 'The Walking Dead: Season One' what is the name of Clementine's father?",
+            "correctAnswer": "Ed",
+            "chooses": [
+                "Charles",
+                "Lee",
+                "Walter"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Entertainment: Video Games",
+            "question": "Which of these is NOT the name of a team leader in Pok&eacute;mon GO?",
+            "correctAnswer": "Leif",
+            "chooses": [
+                "Blanche",
+                "Spark",
+                "Candela"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Sports",
+            "question": "What is the full name of the footballer 'Cristiano Ronaldo'?",
+            "correctAnswer": "Cristiano Ronaldo dos Santos Aveiro",
+            "chooses": [
+                "Cristiano Ronaldo los Santos Diego",
+                "Cristiano Armando Diego Ronaldo",
+                "Cristiano Luis Armando Ronaldo"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Entertainment: Music",
+            "question": "Which M83 album is the song 'Midnight City' featured in?",
+            "correctAnswer": "Hurry Up, We're Dreaming",
+            "chooses": [
+                "Saturdays = Youth",
+                "Before the Dawn Heals Us",
+                "Junk"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "History",
+            "question": "What year did the Vietnam War end?",
+            "correctAnswer": "1975",
+            "chooses": [
+                "1978",
+                "1967",
+                "1969"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Entertainment: Music",
+            "question": "Pete Townshend collaborated with which famous guitarist for an event at Brixton Academy in 1985?",
+            "correctAnswer": "David Gilmour",
+            "chooses": [
+                "Jimmy Page",
+                "Mark Knopfler",
+                "Eric Clapton"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Science &amp; Nature",
+            "question": "At what temperature does water boil?",
+            "correctAnswer": "212&deg;F",
+            "chooses": [
+                "200&deg;F",
+                "181&deg;F",
+                "178&deg;F"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "History",
+            "question": "What was the name of the planned invasion of Japan towards the end of World War II?",
+            "correctAnswer": "Operation Downfall",
+            "chooses": [
+                "Operation Boarding Party",
+                "Operation Ironclad",
+                "Operation Aflame"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "History",
+            "question": "What was the first sport to have been played on the moon?",
+            "correctAnswer": "Golf",
+            "chooses": [
+                "Football",
+                "Tennis",
+                "Soccer"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Entertainment: Music",
+            "question": "How many copies have Metallica album 'Metallica' (A.K.A The Black Album) sold worldwide (in Millions of Copies)?",
+            "correctAnswer": "20.5",
+            "chooses": [
+                "19.5",
+                "22.5",
+                "25.5"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Entertainment: Board Games",
+            "question": "In standard Monopoly, what's the rent if you land on Park Place with no houses?",
+            "correctAnswer": "$35",
+            "chooses": [
+                "$30",
+                "$50",
+                "$45"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Entertainment: Music",
+            "question": "What was the subject of the 2014 song 'CoCo' by American rapper O. T. Genasis?",
+            "correctAnswer": "Cocaine",
+            "chooses": [
+                "Conan O'Brien",
+                "Cobalt(II) carbonate",
+                "Coconut cream pie"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Entertainment: Video Games",
+            "question": "In 'Overwatch', which hero is able to wallride?",
+            "correctAnswer": "Lucio",
+            "chooses": [
+                "Reinhardt",
+                "Sombra",
+                "Mercy"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "History",
+            "question": "The main objective of the German operation 'Case Blue' during World War II was originally to capture what?",
+            "correctAnswer": "Caucasus",
+            "chooses": [
+                "Stalingrad",
+                "Crimea",
+                "Voronezh"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Entertainment: Television",
+            "question": "In the Doctor Who universe, how many times can a time lord normally regenerate?",
+            "correctAnswer": "12",
+            "chooses": [
+                "11",
+                "13",
+                "15"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Science &amp; Nature",
+            "question": "What is the first element on the periodic table?",
+            "correctAnswer": "Hydrogen",
+            "chooses": [
+                "Helium",
+                "Oxygen",
+                "Lithium"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Entertainment: Video Games",
+            "question": "When was the first 'Half-Life' released?",
+            "correctAnswer": "1998",
+            "chooses": [
+                "2004",
+                "1999",
+                "1997"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Science: Computers",
+            "question": "Moore's law originally stated that the number of transistors on a microprocessor chip would double every...",
+            "correctAnswer": "Year",
+            "chooses": [
+                "Four Years",
+                "Two Years",
+                "Eight Years"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Entertainment: Music",
+            "question": "Which year was the album 'Year of the Snitch' by Death Grips released?",
+            "correctAnswer": "2018",
+            "chooses": [
+                "2013",
+                "2017",
+                "2011"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Entertainment: Video Games",
+            "question": "What is the name of the main island in PLAYERUNKNOWN'S BATTLEGROUNDS?",
+            "correctAnswer": "Erangel",
+            "chooses": [
+                "Marmara",
+                "Severny",
+                "Lastovo"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Entertainment: Video Games",
+            "question": "Gordon Freeman is said to have burnt and destroyed what food in the break room microwave?",
+            "correctAnswer": "Casserole",
+            "chooses": [
+                "Sub Sandwich",
+                "Chicken Soup",
+                "Pepperoni Pizza"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Science &amp; Nature",
+            "question": "Which of these is a stop codon in DNA?",
+            "correctAnswer": "TAA",
+            "chooses": [
+                "ACT",
+                "ACA",
+                "GTA"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "General Knowledge",
+            "question": "What is the name given to Indian food cooked over charcoal in a clay oven?",
+            "correctAnswer": "Tandoori",
+            "chooses": [
+                "Biryani",
+                "Pani puri",
+                "Tiki masala"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Entertainment: Video Games",
+            "question": "In the game 'Red Dead Redemption', what is the name of John Marston's dog?",
+            "correctAnswer": "Rufus",
+            "chooses": [
+                "Rutus",
+                "Finn",
+                "Apollo"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Sports",
+            "question": "Which English football team is nicknamed 'The Tigers'?",
+            "correctAnswer": "Hull City",
+            "chooses": [
+                "Cardiff City",
+                "Bristol City",
+                "Manchester City"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Entertainment: Video Games",
+            "question": "In the game The World Ends With You, all of these characters act as a game partner with Neku for a week except:",
+            "correctAnswer": "Rhyme",
+            "chooses": [
+                "Shiki",
+                "Joshua",
+                "Beat"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "General Knowledge",
+            "question": "Rolex is a company that specializes in what type of product?",
+            "correctAnswer": "Watches",
+            "chooses": [
+                "Cars",
+                "Computers",
+                "Sports equipment"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Entertainment: Video Games",
+            "question": "In the 'Metal Gear Solid' series, what's the name of Solid Snake's brother?",
+            "correctAnswer": "Liquid Snake",
+            "chooses": [
+                "Kulus Snake",
+                "Billy Snake",
+                "Gilur Snake"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Entertainment: Board Games",
+            "question": "How many rooms are there, not including the hallways and the set of stairs, in the board game 'Clue'?",
+            "correctAnswer": "9",
+            "chooses": [
+                "1",
+                "6",
+                "10"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Celebrities",
+            "question": "Paul McCartney has always used his middle name. What is his real first name? ",
+            "correctAnswer": "James",
+            "chooses": [
+                "John",
+                "Jack",
+                "Justin"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Entertainment: Japanese Anime &amp; Manga",
+            "question": "In 'Toriko', which of the following foods is knowingly compatible with Toriko?",
+            "correctAnswer": "Poison Potato",
+            "chooses": [
+                "Mors Oil",
+                "Alpacookie",
+                "Parmesansho Fruit"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Entertainment: Comics",
+            "question": "Which of the following superheros did Wonder Woman NOT have a love interest in?",
+            "correctAnswer": "Green Arrow",
+            "chooses": [
+                "Superman",
+                "Batman",
+                "Steve Trevor"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Entertainment: Books",
+            "question": "What is the name of Eragon's dragon in 'Eragon'?",
+            "correctAnswer": "Saphira",
+            "chooses": [
+                "Glaedr",
+                "Thorn",
+                "Arya"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Geography",
+            "question": "Which city is the capital of Switzerland?",
+            "correctAnswer": "Bern",
+            "chooses": [
+                "Zürich",
+                "Frankfurt",
+                "Wien"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Sports",
+            "question": "What was the final score of the Germany vs. Brazil 2014 FIFA World Cup match?",
+            "correctAnswer": "7 - 1",
+            "chooses": [
+                "0 - 1",
+                "3 - 4",
+                "16 - 0"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "History",
+            "question": "In 1961, an American B-52 aircraft crashed and nearly detonated two 4mt nuclear bombs over which US city?",
+            "correctAnswer": "Goldsboro, North Carolina",
+            "chooses": [
+                "Hicksville, New York",
+                "Jacksonville, Florida",
+                "Conway, Arkansas"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Science: Computers",
+            "question": "What was the name of the security vulnerability found in Bash in 2014?",
+            "correctAnswer": "Shellshock",
+            "chooses": [
+                "Heartbleed",
+                "Bashbug",
+                "Stagefright"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Entertainment: Video Games",
+            "question": "What happened to Half-Life 2 prior to its release, which resulted in Valve starting over the development of the game?",
+            "correctAnswer": "The source code got leaked",
+            "chooses": [
+                "They weren't satisfied with the result",
+                "The story was not good enough",
+                "Way too many bugs to be fixed"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "easy",
+            "category": "Vehicles",
+            "question": "What country was the Trabant 601 manufactured in?",
+            "correctAnswer": "East Germany",
+            "chooses": [
+                "Soviet Union",
+                "Hungary",
+                "France"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Animals",
+            "question": "What type of creature is a Bonobo?",
+            "correctAnswer": "Ape",
+            "chooses": [
+                "Lion",
+                "Parrot",
+                "Wildcat"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Entertainment: Video Games",
+            "question": "In 'Call Of Duty: Zombies', 'Richtofen' is in possession of two filled blood vials belonging to who?",
+            "correctAnswer": "Sal DeLuca and Finn O'Leary",
+            "chooses": [
+                "Richtofen",
+                "Al Arlington and Sal DeLuca",
+                "Jessica Rose and Jack Vincent"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "medium",
+            "category": "Entertainment: Japanese Anime &amp; Manga",
+            "question": "The main protagonist of the fifth part of JoJo's Bizarre Adventure is which of the following?",
+            "correctAnswer": "Giorno Giovanna",
+            "chooses": [
+                "Guido Mista",
+                "Jonathan Joestar",
+                "Joey JoJo"
+            ]
+        },
+        {
+            "type": "multiple",
+            "difficulty": "hard",
+            "category": "Animals",
+            "question": "Which of the following is another name for the 'Poecilotheria Metallica Tarantula'?",
+            "correctAnswer": "Gooty",
+            "chooses": [
+                "Hopper",
+                "Silver Stripe",
+                "Woebegone"
+            ]
+        }
+    ]
+}
