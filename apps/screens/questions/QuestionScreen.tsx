@@ -1,5 +1,5 @@
-import { ActivityIndicator, Animated, StyleSheet, View, Text } from 'react-native';
-import React, { useEffect, useState, useId } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+import React, { useEffect, useState, } from 'react';
 import useStoreQuestion from '@/stores/useStoreQuestion';
 import { FlatList, RefreshControl } from 'react-native-gesture-handler';
 import { useTheme, Snackbar } from 'react-native-paper';
@@ -18,7 +18,6 @@ const QuestionScreen = (props: NativeStackScreenProps<RootStackProps>) => {
   const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
   const storageBoard = useStoreBoard();
   const storeDialog = useStoreDialog();
-  const id = useId();
   const {
     loading,
     question,
@@ -26,7 +25,7 @@ const QuestionScreen = (props: NativeStackScreenProps<RootStackProps>) => {
     onValidate,
     compare,
     onSubmit,
-    createQuestionState,
+    clearQuestionState,
     testerName
   } = useStoreQuestion();
 
@@ -48,14 +47,12 @@ const QuestionScreen = (props: NativeStackScreenProps<RootStackProps>) => {
       score: score.correct,
       testerName
     });
-    setTimeout(() => {
-      createQuestionState()
-      props.navigation.dispatch(
-        CommonActions.navigate({
-          name: "Result",
-        })
-      );
-    }, 3 * 1000);
+    clearQuestionState();
+    props.navigation.dispatch(
+      CommonActions.navigate({
+        name: "Result",
+      })
+    );
   };
   useEffect(() => {
     setQuestion();

@@ -1,7 +1,5 @@
 import { create } from 'zustand';
 import { questions } from "@/question.json";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { persist } from "zustand/middleware";
 interface IQuistionExtend extends IQuestion {
     id: string;
 }
@@ -19,7 +17,7 @@ interface StoreQuestion {
     loading: boolean;
     question: IQuistionExtend[];
     testerName: string;
-    createQuestionState:() => void;
+    clearQuestionState:() => void;
     setTesterName: (s: string) => void;
     asnwers: Array<IAsnwers>;
     score: IScore | null;
@@ -41,7 +39,7 @@ const useStoreQuestion = create<StoreQuestion>()((set, get) => ({
     testerName: "",
     score: null,
     onSubmit: false,
-    createQuestionState:() => set({
+    clearQuestionState:() => set({
         loading:false,
         question:[],
         asnwers:[],
@@ -85,7 +83,6 @@ const useStoreQuestion = create<StoreQuestion>()((set, get) => ({
             incorrect,
         };
         set({
-            onSubmit: false,
             score
         });
         return score;

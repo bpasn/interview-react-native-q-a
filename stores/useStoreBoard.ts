@@ -6,6 +6,7 @@ import { zustandStorage } from './StorageMMK';
 interface StoreBoard {
     boards: Array<IBoard>;
     setBoard: (board: IBoard) => void;
+    remove:(id:string) => void;
 
 }
 
@@ -15,6 +16,9 @@ const useStoreBoard = create<StoreBoard>()(persist(
         boards: [],
         setBoard: (board: IBoard) => {
             set({ boards: [...get().boards, board] });
+        },
+        remove:(id:string) => {
+           return set({boards:get().boards.filter(e => e.id !== id)})
         }
     }),
     {

@@ -39,7 +39,7 @@ const MyStack = ({ }) => {
                     },
                 }} />
                 <Stack.Screen name='Board' component={BoardScreen} options={{
-                    title: 'Boards',
+                    title: 'Scoreboard',
                     headerLeft:() => null,
                     headerBackTitleVisible: false, // Hide back button text
                     headerTintColor: theme.colors.primary, // Back button color

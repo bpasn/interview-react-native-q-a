@@ -6,6 +6,7 @@ import {
   View,
   Image,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Button from '@/apps/components/button';
@@ -20,20 +21,21 @@ import LoadingSpiner from '@/apps/components/loading';
 import useStoreQuestion from '@/stores/useStoreQuestion';
 import useStoreDialogBoard from '@/stores/useStoreDialogBoard';
 import { storage, zustandStorage } from '@/stores/StorageMMK';
+import { theme } from '@/apps/config/theme';
 
 
 const BoardScreen = (props: NativeStackScreenProps<RootStackProps>) => {
   const [height, setHeight] = useState<number>(0);
   const [testerName, setTesterName] = useState<string>();
-  const [error,setError] = useState<string | null>();
+  const [error, setError] = useState<string | null>();
   const styles = useStyles();
   const theme = useTheme();
   const storeBoard = useStoreBoard();
   const storageDialog = useStoreDialogBoard();
   const storageQuestion = useStoreQuestion();
 
-useEffect(() => {
-},[])
+  useEffect(() => {
+  }, []);
   return (
     <SafeAreaView
       onLayout={() => {
@@ -43,6 +45,7 @@ useEffect(() => {
       }}
       style={[styles.container, {
         paddingTop: height,
+        backgroundColor: theme.colors.inversePrimary
       }]}>
 
       <View style={[styles.container, {
@@ -54,14 +57,10 @@ useEffect(() => {
           />
         </View>
         <View style={styles.listBoard}>
-          {storeBoard.boards.length 
+          {storeBoard.boards.length
             ? (
               <FlatList
-                style={{
-                  flex: 1,
-                  alignSelf: "stretch",
-                  paddingHorizontal: 10,
-                }}
+                style={styles.flatListStyle}
                 data={storeBoard.boards}
                 renderItem={({ item, index }) => renderItemlist(item)}
                 keyExtractor={(item, index) => String(index)}
@@ -73,8 +72,9 @@ useEffect(() => {
               }}>
                 <Text style={{
                   fontSize: 30,
-                  fontWeight: "500"
-                }}>Board is Empty!</Text>
+                  fontWeight: "500",
+                  color:theme.colors.onPrimary
+                }}>No board score!</Text>
               </View>
             )}
         </View>
@@ -96,17 +96,18 @@ useEffect(() => {
         title={'Tester name'}
         onCancel={storageDialog.onClose}
         onPress={() => {
-          if(!testerName?.length) {
-          setError("Please enter your name!")
-            return ;
+          if (!testerName?.length) {
+            setError("Please enter your name!");
+            return;
           }
           setError(null);
           storageQuestion.setTesterName(testerName!);
+          setTesterName("");
           storageDialog.onClose();
           setTimeout(() => {
             storageQuestion.setLoading();
             props.navigation.navigate("Question");
-          },2*1000);
+          }, 2 * 1000);
         }}
       >
         <TextInput
@@ -115,11 +116,11 @@ useEffect(() => {
           mode="outlined"
           error={!!error}
           onChangeText={text => {
-            setTesterName(text)
+            setTesterName(text);
           }}
         />
         {error && <Text style={{
-          color:theme.colors.error
+          color: theme.colors.error
         }}>{error}</Text>}
       </DialogComponent>
     </SafeAreaView>
@@ -128,23 +129,18 @@ useEffect(() => {
   function renderItemlist(item: IBoard) {
     return (
       <Card style={{ marginBottom: 15 }}>
-        <Card.Content style={{
-        }}>
+        <Card.Content >
           <List.Item
             title={"Tester : " + item.testerName}
-            titleStyle={{
-              fontSize: 22,
-              fontWeight: "500",
-              color: theme.colors.secondary,
-              paddingBottom: 5
-            }}
+            right={() => (
+              <TouchableOpacity onPress={() => storeBoard.remove(item.id)}>
+                <List.Icon icon={"close"} color={theme.colors.error} />
+              </TouchableOpacity>
+            )}
+            titleStyle={styles.titleStyle}
             description={() => (
               <View>
-                <Text style={{
-                  fontSize: 18,
-                  color: theme.colors.onSecondaryContainer,
-                  fontWeight: "600"
-                }}>Score : {item.score} / 20</Text>
+                <Text style={styles.listStyleDescription}>Score : {item.score} / 20</Text>
               </View>
             )}
           />
@@ -164,7 +160,7 @@ const useStyles = () => StyleSheet.create({
     height: "100%",
   },
   listBoard: {
-    flex: 3,
+    flex: 4,
     alignSelf: "stretch",
     justifyContent: "flex-start",
     alignItems: "flex-start",
@@ -189,5 +185,20 @@ const useStyles = () => StyleSheet.create({
     marginBottom: 1,
     padding: 15
   },
-
+  titleStyle: {
+    fontSize: 22,
+    fontWeight: "500",
+    color: theme.colors.secondary,
+    paddingBottom: 5
+  },
+  listStyleDescription :{
+    fontSize: 18,
+    color: theme.colors.onSecondaryContainer,
+    fontWeight: "600"
+  },
+  flatListStyle:{
+    flex: 1,
+    alignSelf: "stretch",
+    paddingHorizontal: 10,
+  }
 });
