@@ -1,6 +1,6 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from "zustand/middleware";
-import { zustandStorage } from './StorageMMK';
 
 
 interface StoreBoard {
@@ -23,7 +23,7 @@ const useStoreBoard = create<StoreBoard>()(persist(
     }),
     {
         name: "boards-store",
-        storage: createJSONStorage(() => zustandStorage), // Updated
+        storage: createJSONStorage(() => AsyncStorage), // Updated
         
     }
 ));
