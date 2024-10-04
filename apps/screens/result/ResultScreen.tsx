@@ -1,4 +1,4 @@
-import { StyleSheet, View, Image, Platform, StatusBar, Text } from 'react-native';
+import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
 import React from 'react';
 import Button from '../../components/button';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -7,8 +7,9 @@ import { List, useTheme } from 'react-native-paper';
 import useStoreQuestion from '@/stores/useStoreQuestion';
 const HomeScreen = (props: NativeStackScreenProps<RootStackProps>) => {
     const score = useStoreQuestion(state => state.score);
+    const question = useStoreQuestion();
     const theme = useTheme();
-    
+
     return (
         <View style={[styles.container, {}]}>
             <View style={styles.imageContainer}>
@@ -24,7 +25,10 @@ const HomeScreen = (props: NativeStackScreenProps<RootStackProps>) => {
                 <Button
                     label="Back to the board"
                     style={{ alignSelf: "stretch" }}
-                    onPress={() => props.navigation.navigate("Board")}
+                    onPress={() => {
+                        props.navigation.navigate("Board");
+                        question.clearQuestionState();
+                    }}
                 />
             </View>
         </View>

@@ -1,31 +1,27 @@
 import {
-  Platform,
   SafeAreaView,
-  StatusBar,
   StyleSheet,
   View,
-  Image,
   Text,
-  TouchableOpacity,
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Button from '@/apps/components/button';
-import { Card, List, TextInput, useTheme } from 'react-native-paper';
+import { TextInput, useTheme } from 'react-native-paper';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackProps } from '../MyStack';
 import useStoreBoard from '@/stores/useStoreBoard';
 import { FlatList } from 'react-native-gesture-handler';
 import DialogComponent from '@/apps/components/dialog';
-import useStoreDialog from '@/stores/useStoreDialog';
-import LoadingSpiner from '@/apps/components/loading';
 import useStoreQuestion from '@/stores/useStoreQuestion';
 import useStoreDialogBoard from '@/stores/useStoreDialogBoard';
-import { storage, zustandStorage } from '@/stores/StorageMMK';
 import { theme } from '@/apps/config/theme';
-
-
+import FaceSkin from '../../../assets/child-light-skin-tone.svg'
+import Crown from '../../../assets/crown.svg';
+import One from '../../../assets/medal-gold-winner-2.svg'
+import Two from '../../../assets/2nd-place-medal.svg'
+import Three from '../../../assets/3rd-place-medal.svg'
+import * as svg from 'react-native-svg';
 const BoardScreen = (props: NativeStackScreenProps<RootStackProps>) => {
-  const [height, setHeight] = useState<number>(0);
   const [testerName, setTesterName] = useState<string>();
   const [error, setError] = useState<string | null>();
   const styles = useStyles();
@@ -33,28 +29,91 @@ const BoardScreen = (props: NativeStackScreenProps<RootStackProps>) => {
   const storeBoard = useStoreBoard();
   const storageDialog = useStoreDialogBoard();
   const storageQuestion = useStoreQuestion();
-
-  useEffect(() => {
-  }, []);
   return (
-    <SafeAreaView
-      onLayout={() => {
-        if (Platform.OS === 'android') {
-          setHeight(StatusBar.currentHeight || 0);
-        }
-      }}
-      style={[styles.container, {
-        paddingTop: height,
-        backgroundColor: theme.colors.inversePrimary
-      }]}>
+    <SafeAreaView>
+      <View style={[styles.container]}>
+        <View style={styles.topThree}>
+          {storeBoard.boards.length ? (
+            <View style={{
+              padding: 10,
+              width: "100%",
+              display: 'flex',
+              flexDirection: "row",
+              justifyContent: 'space-between',
+              gap: 10,
+              margin: 8,
+            }}>
+              {storeBoard.boards.slice(0, 3).map((item, index) => (
+                <View key={item.id} style={{
+                  flex: 1,
+                  marginTop: index !== 1 ? 30 : 0,
+                  alignItems: "center",
+                  gap: 10
+                }}>
+                  <View style={{
+                    position: "relative",
+                    borderRadius: 100,
+                    width: index !== 1 ? 110 : 130,
+                    height: index !== 1 ? 110 : 130,
+                    alignItems: "center",
+                    justifyContent: "center",
 
-      <View style={[styles.container, {
-      }]}>
-        <View style={styles.imageContainer}>
-          <Image
-            style={styles.image}
-            source={require("../../../assets/images/quizshow-bro.png")}
-          />
+                    display: "flex",
+                  }} >
+                    <svg.Svg width={index !== 1 ? 60 : 80} height={index !== 1 ? 60 : 80} style={{
+                      position: "relative"
+                    }}>
+                      <FaceSkin />
+                    </svg.Svg>
+                    <svg.Svg width={80} height={70} style={{
+                      position: "absolute",
+                      left: 25,
+                      top: -10,
+                      display: index !== 1 ? "none" : "flex"
+                    }}>
+                      <Crown />
+                    </svg.Svg>
+                    <svg.Svg width={80} height={70} style={{
+                      position: "absolute",
+                      left: 25,
+                      top: 95,
+                      display: index !== 1 ? "none" : "flex"
+                    }}>
+                      <One />
+                    </svg.Svg>
+                    <svg.Svg width={50} height={40} style={{
+                      position: "absolute",
+                      left: 30,
+                      top: 82,
+                      display: index !== 0 ? "none" : "flex"
+                    }}>
+                      <Two />
+                    </svg.Svg>
+                    <svg.Svg width={50} height={40} style={{
+                      position: "absolute",
+                      left: 30,
+                      top: 82,
+                      display: index !== 2 ? "none" : "flex"
+                    }}>
+                      <Three />
+                    </svg.Svg>
+                  </View>
+                  <Text style={{
+                    marginTop: 20,
+                    fontWeight: "600",
+                    fontSize: 20,
+                    textAlign: "center",
+                  }}>{item.playerName}</Text>
+                  <Text
+                    style={{
+                      fontWeight: "400",
+                      fontSize: 18,
+                      textAlign: "center",
+                    }}>{item.score}</Text>
+                </View>
+              ))}
+            </View>
+          ) : null}
         </View>
         <View style={styles.listBoard}>
           {storeBoard.boards.length
@@ -62,8 +121,8 @@ const BoardScreen = (props: NativeStackScreenProps<RootStackProps>) => {
               <FlatList
                 style={styles.flatListStyle}
                 data={storeBoard.boards}
-                renderItem={({ item, index }) => renderItemlist(item)}
-                keyExtractor={(item, index) => String(index)}
+                renderItem={(d) => renderItemlist(d.index, d.item)}
+                keyExtractor={(item) => item.id.toString()}
               />
             )
             : (
@@ -73,7 +132,7 @@ const BoardScreen = (props: NativeStackScreenProps<RootStackProps>) => {
                 <Text style={{
                   fontSize: 30,
                   fontWeight: "500",
-                  color:theme.colors.onPrimary
+                  color: theme.colors.onPrimary
                 }}>No board score!</Text>
               </View>
             )}
@@ -88,26 +147,20 @@ const BoardScreen = (props: NativeStackScreenProps<RootStackProps>) => {
           />
         </View>
       </View>
-
-      <LoadingSpiner loading={storageQuestion.loading} />
       <DialogComponent
         visible={storageDialog.visible}
         onDismiss={storageDialog.onClose}
-        title={'Tester name'}
+        title={'Player name'}
         onCancel={storageDialog.onClose}
-        onPress={() => {
+        onPress={async () => {
           if (!testerName?.length) {
             setError("Please enter your name!");
             return;
           }
           setError(null);
-          storageQuestion.setTesterName(testerName!);
-          setTesterName("");
           storageDialog.onClose();
-          setTimeout(() => {
-            storageQuestion.setLoading();
-            props.navigation.navigate("Question");
-          }, 2 * 1000);
+          storageQuestion.setPlayerName(testerName!);
+          props.navigation.navigate("Question");
         }}
       >
         <TextInput
@@ -123,34 +176,72 @@ const BoardScreen = (props: NativeStackScreenProps<RootStackProps>) => {
           color: theme.colors.error
         }}>{error}</Text>}
       </DialogComponent>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 
-  function renderItemlist(item: IBoard) {
+  function renderItemlist(index: number, item: IBoard) {
     return (
-      <Card style={{ marginBottom: 15 }}>
-        <Card.Content >
-          <List.Item
-            title={"Tester : " + item.testerName}
-            right={() => (
-              <TouchableOpacity onPress={() => storeBoard.remove(item.id)}>
-                <List.Icon icon={"close"} color={theme.colors.error} />
-              </TouchableOpacity>
-            )}
-            titleStyle={styles.titleStyle}
-            description={() => (
-              <View>
-                <Text style={styles.listStyleDescription}>Score : {item.score} / 20</Text>
-              </View>
-            )}
-          />
-        </Card.Content>
-      </Card>
+      <View style={{
+        padding: 8,
+        marginVertical: 5,
+        borderRadius: 30,
+        borderWidth: 1.4,
+        borderColor: theme.colors.inversePrimary
+      }}>
+        <View style={{
+          display: "flex",
+          justifyContent: "space-between",
+          flexDirection: "row",
+          alignContent: "center",
+          alignItems: "center",
+        }}>
+          <View style={{
+            display: 'flex',
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 20,
+          }}>
+            <View style={{
+              backgroundColor: theme.colors.inversePrimary,
+              alignContent: "center",
+              alignItems: "center",
+              justifyContent: "center",
+              display: "flex",
+              borderRadius: 30,
+              width: 30,
+              height: 30,
+            }}>
+              <Text style={[styles.titleStyle, {
+                color: "#fff",
+              }]}>{index + 1}</Text>
+            </View>
+            <Text style={styles.titleStyle}>{item.playerName}</Text>
+          </View>
+          <Text style={styles.listStyleDescription}>{item.score} / {storageQuestion.totalQuestion}</Text>
+        </View>
+      </View>
 
     );
   };
 };
 
+
+const sort = (boards: IBoard[]) => {
+  let itemSort = [];
+  for (let i = 0; i < boards.length; i++) {
+    let max = -Infinity;
+    let maxIndex = -1;
+    for (let j = 0; j < boards.length; j++) {
+      if (boards[j].score > max) {
+        max = boards[j].score;
+        maxIndex = j;
+      }
+    }
+    itemSort.push(boards[maxIndex]);
+    boards.splice(maxIndex, 1);
+  }
+  return itemSort
+}
 export default BoardScreen;
 
 const useStyles = () => StyleSheet.create({
@@ -164,13 +255,10 @@ const useStyles = () => StyleSheet.create({
     alignSelf: "stretch",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
-  imageContainer: {
-    flex: 2,
-    alignSelf: "stretch",
-    justifyContent: 'center',
-    alignItems: 'center',
+  topThree: {
+    flex: 2.5,
   },
   image: {
     width: "100%",
@@ -186,17 +274,15 @@ const useStyles = () => StyleSheet.create({
     padding: 15
   },
   titleStyle: {
-    fontSize: 22,
-    fontWeight: "500",
-    color: theme.colors.secondary,
+    fontSize: 16,
     paddingBottom: 5
   },
-  listStyleDescription :{
-    fontSize: 18,
+  listStyleDescription: {
+    fontSize: 20,
     color: theme.colors.onSecondaryContainer,
-    fontWeight: "600"
+    fontWeight: "700"
   },
-  flatListStyle:{
+  flatListStyle: {
     flex: 1,
     alignSelf: "stretch",
     paddingHorizontal: 10,

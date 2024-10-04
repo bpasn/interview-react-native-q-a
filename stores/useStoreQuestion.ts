@@ -1,104 +1,130 @@
 import { create } from 'zustand';
 import { questions } from "@/question.json";
-interface IQuistionExtend extends IQuestion {
-    id: string;
-}
-interface IAsnwers {
-    id: string;
-    asnwer: string;
-    correct: string;
-}
-interface IScore {
-    correct: number;
-    incorrect: number;
-    result: string;
-}
+import useStoreBoard from './useStoreBoard';
+import useStoreLoading from './useStoreLoading';
+import useStoreDialog from './useStoreDialog';
+
 interface StoreQuestion {
     loading: boolean;
     question: IQuistionExtend[];
-    testerName: string;
-    clearQuestionState:() => void;
-    setTesterName: (s: string) => void;
-    asnwers: Array<IAsnwers>;
+    clearQuestionState: () => void;
+    asnwers: Array<IAnswer>;
     score: IScore | null;
-    findAsnwers: (id: string) => IAsnwers | null;
+    findAnswers: (id: string) => IAnswer | null;
     compare: () => Promise<IScore>;
     onSelect: (v: string, id: string, correct: string) => void;
     onValidate: () => boolean;
     setQuestion: () => void;
     setLoading: () => void;
     onSubmit: boolean;
+    playerName: string;
+    setPlayerName: (p: string) => void;
+    totalQuestion: number;
+    currentQuestion: number;
+    nextQuestion: () => void;
+    prveQuestion: () => void;
+    flag: "VIEW" | "INIT"
 
 }
 
 
-const useStoreQuestion = create<StoreQuestion>()((set, get) => ({
-    question: [],
-    asnwers: [],
-    loading: false,
-    testerName: "",
-    score: null,
-    onSubmit: false,
-    clearQuestionState:() => set({
-        loading:false,
-        question:[],
-        asnwers:[],
-        testerName:"",
-        onSubmit:false,
-    }),
-    setTesterName: (testerName: string) => set({ testerName, loading: true }),
-    setLoading: () => set({ loading: !get().loading }),
-    setQuestion: async () => {
-        set({
-            loading: true,
-            asnwers: []
-        });
-        await delay(2 * 1000);
-        set({ question: randomQuestion(), loading: false });
-    },
-    findAsnwers: (id: string) => {
-        const asnwer = get().asnwers.find(asw => asw.id === id);
-        if (!asnwer) return null;
-        return asnwer;
-    },
-    onSelect: (v: string, id: string, correct: string) => {
-        const exists = get().asnwers.find(a => a.id === id);
-        set({
-            asnwers: exists ? get().asnwers.map(e => {
-                if (e.id === id) {
-                    e.asnwer = v;
+const useStoreQuestion = create<StoreQuestion>()(
+    (set, get) => {
+        return ({
+            question: [],
+            asnwers: [],
+            loading: false,
+            totalQuestion: 10,
+            playerName: "",
+            currentQuestion: 0,
+            flag: "INIT",
+            nextQuestion: () => {
+                if (get().currentQuestion === get().question.length - 1) {
+                    return;
                 }
-                return e;
-            }) : [...get().asnwers, { id, asnwer: v, correct }]
+                let current = get().currentQuestion;
+                current++
+                return set({ currentQuestion: current });
+            },
+            prveQuestion: () => {
+                if (get().currentQuestion === 0) return;
+                let current = get().currentQuestion;
+                current--;
+                set({ currentQuestion: current });
+            },
+            setPlayerName: (name: string) => {
+                set({ playerName: name });
+            },
+            score: null,
+            onSubmit: false,
+            clearQuestionState: () => set({
+                loading: false,
+                playerName: "",
+                question: [],
+                asnwers: [],
+                onSubmit: false,
+                currentQuestion: 0,
+                flag: "INIT",
+            }),
+            setLoading: () => set({ loading: !get().loading }),
+            setQuestion: async () => {
+                useStoreLoading.getState().setLoading();
+                set({
+                    asnwers: []
+                });
+                await delay(2 * 1000);
+                set({ question: randomQuestion(get().totalQuestion) });
+                useStoreLoading.getState().setLoading();
+            },
+            findAnswers: (id: string) => {
+                const asnwer = get().asnwers.find(asw => asw.id === id);
+                if (!asnwer) return null;
+                return asnwer;
+            },
+            onSelect: (v: string, id: string, correct: string) => {
+                const exists = get().asnwers.find(a => a.id === id);
+                set({
+                    asnwers: exists ? get().asnwers.map(e => {
+                        if (e.id === id) {
+                            e.asnwer = v;
+                        }
+                        return e;
+                    }) : [...get().asnwers, { id, asnwer: v, correct }]
+                });
+            },
+            compare: async (): Promise<IScore> => {
+                useStoreLoading.getState().setLoading();
+                const correct = get().asnwers.reduce((prv, cur) => prv += cur.correct === cur.asnwer ? 1 : 0, 0);
+                const incorrect = get().asnwers.reduce((prv, cur) => prv += cur.correct !== cur.asnwer ? 1 : 0, 0);
+                const score = {
+                    result: String(`${correct}/${get().question.length}`),
+                    correct,
+                    incorrect,
+                };
+                set({
+                    score
+                });
+                useStoreBoard.getState().setBoard({
+                    score: score.correct,
+                    playerName: useStoreQuestion.getState().playerName!,
+                    answer: get().asnwers,
+                    questions: get().question
+                });
+                useStoreQuestion.getState().clearQuestionState();
+                useStoreLoading.getState().setLoading();
+                return score;
+            },
+            onValidate: () => {
+                if (get().asnwers.length !== get().question.length) return false;
+                return true;
+            }
         });
-    },
-    compare: async (): Promise<IScore> => {
-        set({ onSubmit: true });
-        const correct = get().asnwers.reduce((prv, cur) => prv += cur.correct === cur.asnwer ? 1 : 0, 0);
-        const incorrect = get().asnwers.reduce((prv, cur) => prv += cur.correct !== cur.asnwer ? 1 : 0, 0);
-        await delay(3 * 1000);
-        const score = {
-            result: String(`${correct}/${get().question.length}`),
-            correct,
-            incorrect,
-        };
-        set({
-            score
-        });
-        return score;
-    },
-    onValidate: () => {
-        console.log(get().asnwers.length);
-        console.log(get().question.length);
-        if (get().asnwers.length !== get().question.length) return false;
-        return true;
-    }
-}));
+    });
 
 const delay = (duration: number) => new Promise(resolve => { setTimeout(resolve, duration); });
-const randomQuestion = (): IQuistionExtend[] => {
+const randomQuestion = (count: number): IQuistionExtend[] => {
     let tmp = [...questions];
-    let limit = 20;
+    let limit = count;
 
     const getRandomInt = (max: number): number => Math.floor(Math.random() * max);
 

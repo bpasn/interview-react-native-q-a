@@ -7,8 +7,26 @@ interface IQuestion {
     chooses: string[];
 }
 
-interface IBoard {
-    id: string;
+interface MasterBoard {
     score: number;
-    testerName:string;
+    playerName: string;
+    answer?: IAnswer[];
+    questions?: IQuestion[]
+}
+interface IBoard extends MasterBoard {
+    id: string;
+}
+
+interface IQuistionExtend extends IQuestion {
+    id: string;
+}
+interface IAnswer {
+    id: string;
+    asnwer: string;
+    correct: string;
+}
+interface IScore {
+    correct: number;
+    incorrect: number;
+    result: string;
 }

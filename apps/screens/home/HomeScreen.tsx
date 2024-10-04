@@ -1,12 +1,20 @@
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Image } from 'react-native';
-import React, { useState } from 'react';
 import Button from '../../components/button';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackProps } from '../MyStack';
+import useStoreBoard from '@/stores/useStoreBoard';
 import LoadingSpiner from '@/apps/components/loading';
 
 const HomeScreen = (props: NativeStackScreenProps<RootStackProps>) => {
-    const [loading,setLoading] = useState(false);
+    const { fetchBoard, boards } = useStoreBoard();
+    useEffect(() => {
+        fetchBoard().then(() => {
+            if(boards.length){
+                props.navigation.replace("Board");
+            }
+        });
+    }, [boards, fetchBoard, props.navigation]);
     return (
         <View style={useStyles.container}>
             <View style={useStyles.imageContainer}>
@@ -20,15 +28,10 @@ const HomeScreen = (props: NativeStackScreenProps<RootStackProps>) => {
                     label="Get Started"
                     style={{ alignSelf: "stretch" }}
                     onPress={() => {
-                        setLoading(true);
-                        setTimeout(() => {
-                            setLoading(false);
-                            props.navigation.navigate("Board");
-                        },2*1000);
+                        props.navigation.navigate("Board");
                     }}
                 />
             </View>
-            <LoadingSpiner loading={loading} />
         </View>
     );
 };

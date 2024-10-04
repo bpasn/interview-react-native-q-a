@@ -1,32 +1,55 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { storageFirebase } from '@/config/firebaseConfig';
+import { FirebaseService } from '@/services/firebaseService';
 import { create } from 'zustand';
-import { createJSONStorage, persist } from "zustand/middleware";
+import useStoreLoading from './useStoreLoading';
 
+const storage = new FirebaseService(storageFirebase);
 
 interface StoreBoard {
+    boardRef?: string;
     boards: Array<IBoard>;
-    setBoard: (board: IBoard) => void;
-    remove:(id:string) => void;
-
+    setBoard: (board: MasterBoard) => void;
+    remove: (id: string) => Promise<void>;
+    fetchBoard: () => Promise<void>;
 }
 
 
-const useStoreBoard = create<StoreBoard>()(persist(
-    (set, get) => ({
+const useStoreBoard = create<StoreBoard>()
+    ((set, get) => ({
         boards: [],
-        setBoard: (board: IBoard) => {
-            set({ boards: [...get().boards, board] });
+        setBoard: async (board: MasterBoard) => {
+            const query = storage.queryWhere<MasterBoard>("boards", "playerName", "==", board.playerName);
+            const id = await storage.getByPlayerName(query);
+            if (id) {
+                await storage.update(id, board);
+            } else {
+                await storage.save(
+                    {
+                        name: "boards"
+                    },
+                    board
+                )
+            }
+            get().fetchBoard();
         },
-        remove:(id:string) => {
-           return set({boards:get().boards.filter(e => e.id !== id)})
+        remove: async (id: string) => {
+            await storage.delete(id);
+            get().fetchBoard();
+        },
+        fetchBoard: async () => {
+            useStoreLoading.getState().setLoading();
+            try {
+                const boards = await storage.get<IBoard>("boards");
+                const mapBoard: IBoard[] = boards.docs.map(c => ({ ...c.data(), id: c.id }));
+                set({ boards: mapBoard });
+            } catch (error) {
+                console.log(error);
+            } finally {
+                useStoreLoading.getState().setLoading();
+            }
         }
     }),
-    {
-        name: "boards-store",
-        storage: createJSONStorage(() => AsyncStorage), // Updated
-        
-    }
-));
+    );
 
 
 

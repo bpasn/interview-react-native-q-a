@@ -25,8 +25,8 @@ const QuestionItem = ({
         correctAnswer,
         chooses
     } = item;
-    const { onSelect, findAsnwers } = useStoreQuestion();
-    const asnwer = findAsnwers(id);
+    const { onSelect, findAnswers } = useStoreQuestion();
+    const asnwer = findAnswers(id);
 
     const theme = useTheme();
     function renderRadio() {
@@ -62,7 +62,7 @@ const QuestionItem = ({
                     <View style={{
                         paddingTop: 16
                     }}>
-                        <RadioButton.Group onValueChange={(v) => onSelect(v,id,correctAnswer)} value={asnwer?.asnwer!}>
+                        <RadioButton.Group onValueChange={(v) => onSelect(v, id, correctAnswer)} value={asnwer?.asnwer!}>
                             {renderRadio()}
                         </RadioButton.Group>
                     </View>

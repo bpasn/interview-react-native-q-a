@@ -1,15 +1,11 @@
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { useTheme } from 'react-native-paper';
+import useStoreLoading from '@/stores/useStoreLoading';
 
-interface LoadingSpinerProps {
-    loading: boolean;
-};
-
-const LoadingSpiner = ({
-    loading
-}: LoadingSpinerProps) => {
+const LoadingSpiner = () => {
     const theme = useTheme();
+    const { loading } = useStoreLoading();
     return (
         <ActivityIndicator
             style={[styles.loading, {

@@ -8,6 +8,7 @@ interface ButtonProps {
     style?: StyleProp<ViewStyle>;
     linearColor?: string[];
     linear?: boolean;
+    disabled?: boolean;
 }
 
 const Button = ({
@@ -15,13 +16,14 @@ const Button = ({
     onPress,
     linearColor = ['#25bfb6', '#41e596'],
     style,
-    linear = true
+    linear = true,
+    disabled = false
 }: ButtonProps) => {
     const theme = useTheme();
     const styles = useStyles(theme);
     return (
-        <TouchableOpacity onPress={onPress} style={{ alignSelf: "stretch" }}>
-            {linear
+        <TouchableOpacity disabled={disabled} onPress={onPress} style={{ alignSelf: "stretch" }}>
+            {linear && !disabled
                 ? <LinearGradient
                     colors={linearColor}
                     start={{ x: 0, y: 0 }}

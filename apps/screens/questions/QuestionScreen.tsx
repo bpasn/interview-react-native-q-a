@@ -5,18 +5,13 @@ import { FlatList, RefreshControl } from 'react-native-gesture-handler';
 import { useTheme, Snackbar } from 'react-native-paper';
 import QuestionItem from '@/apps/components/question-item';
 import FooterList from '@/apps/components/footer-list';
-import DialogComponent from '@/apps/components/dialog';
 import useStoreDialog from '@/stores/useStoreDialog';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackProps } from '../MyStack';
 import { CommonActions } from '@react-navigation/native';
-import LoadingSpiner from '@/apps/components/loading';
-import useStoreBoard from '@/stores/useStoreBoard';
-import uuid from 'react-native-uuid';
 const QuestionScreen = (props: NativeStackScreenProps<RootStackProps>) => {
   const theme = useTheme();
   const [showSnackbar, setShowSnackbar] = useState<boolean>(false);
-  const storageBoard = useStoreBoard();
   const storeDialog = useStoreDialog();
   const {
     loading,
@@ -24,14 +19,16 @@ const QuestionScreen = (props: NativeStackScreenProps<RootStackProps>) => {
     setQuestion,
     onValidate,
     compare,
-    onSubmit,
     clearQuestionState,
-    testerName
   } = useStoreQuestion();
 
   const handleSubmit = () => {
     if (onValidate()) {
-      storeDialog.onOpen();
+      storeDialog.onOpen({
+        children: () => <Text>send your answer</Text>,
+        title: "Confirm send answer.",
+        onPress: handleSend,
+      });
     } else {
       setShowSnackbar(true);
       setTimeout(() => {
@@ -40,13 +37,8 @@ const QuestionScreen = (props: NativeStackScreenProps<RootStackProps>) => {
     }
   };
   const handleSend = async () => {
-    storeDialog.onClose();
-    const score = await compare();
-    storageBoard.setBoard({
-      id: String(uuid.v4()),
-      score: score.correct,
-      testerName
-    });
+    storeDialog.onDismiss();
+    await compare();
     clearQuestionState();
     props.navigation.dispatch(
       CommonActions.navigate({
@@ -86,8 +78,7 @@ const QuestionScreen = (props: NativeStackScreenProps<RootStackProps>) => {
         Please answer all questions.
       </Snackbar>
 
-      <LoadingSpiner loading={onSubmit} />
-      <DialogComponent
+      {/* <DialogComponent
         visible={storeDialog.visible}
         onDismiss={storeDialog.onClose}
         onPress={handleSend}
@@ -95,7 +86,7 @@ const QuestionScreen = (props: NativeStackScreenProps<RootStackProps>) => {
         title={"Confirm send answer."}
       >
         <Text>Send answer</Text>
-      </DialogComponent>
+      </DialogComponent> */}
     </View>
   );
 };

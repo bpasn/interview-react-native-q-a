@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import React from 'react';
 import { Dialog, Portal, Text, useTheme, MD3Theme, Title, Button, Paragraph, Divider } from 'react-native-paper';
 import ButtonCustom from '../button';
@@ -28,7 +28,7 @@ const DialogComponent = ({
             <Dialog visible={visible} onDismiss={onDismiss} style={{
                 borderRadius: 10
             }}>
-                <Dialog.Title style={{ alignSelf: "stretch", alignItems: "center", justifyContent: "center" }}>
+                <Dialog.Title style={styles.title}>
                     <Title style={{ fontWeight: "600", textAlign: "left", alignSelf: "flex-start" }}>
                         {title}
                     </Title>
@@ -75,13 +75,9 @@ const DialogComponent = ({
 export default DialogComponent;
 
 const useStyles = (theme: MD3Theme) => StyleSheet.create({
-    title: {
-        alignSelf: "stretch",
-        padding: 10,
-        backgroundColor: "red"
-    },
+    title: { alignSelf: "stretch", alignItems: "center", justifyContent: "center" },
     titleText: {
-        fontSize: 22
+        fontSize: Dimensions.get("window").width / 30.90
     },
     btnClose: {
         backgroundColor: theme.colors.primary,
