@@ -20,9 +20,8 @@ import useStoreDialog from '@/stores/useStoreDialog';
 import LoadingSpiner from '@/apps/components/loading';
 import useStoreQuestion from '@/stores/useStoreQuestion';
 import useStoreDialogBoard from '@/stores/useStoreDialogBoard';
-import { storage, zustandStorage } from '@/stores/StorageMMK';
 import { theme } from '@/apps/config/theme';
-
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const BoardScreen = (props: NativeStackScreenProps<RootStackProps>) => {
   const [height, setHeight] = useState<number>(0);
@@ -34,8 +33,7 @@ const BoardScreen = (props: NativeStackScreenProps<RootStackProps>) => {
   const storageDialog = useStoreDialogBoard();
   const storageQuestion = useStoreQuestion();
 
-  useEffect(() => {
-  }, []);
+ 
   return (
     <SafeAreaView
       onLayout={() => {

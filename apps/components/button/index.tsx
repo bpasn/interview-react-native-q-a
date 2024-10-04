@@ -1,7 +1,7 @@
 import { StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import React from 'react';
 import { MD3Theme, useTheme } from 'react-native-paper';
-import LinearGradient from 'react-native-linear-gradient';
+import {LinearGradient} from 'expo-linear-gradient';
 import ButtonCustom from '@/apps/components/button';
 interface ButtonProps {
     label: string;

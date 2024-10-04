@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "486051137610",
+    "project_id": "famous-archway-274409",
+    "storage_bucket": "famous-archway-274409.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486051137610:android:c890903f3177a1cfd5beb3",
+        "android_client_info": {
+          "package_name": "com.prpasn.questioninterview"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486051137610-6frg3ual1g67m611r6vaq74b2g8u91ac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJG6zUOOhxG9SjZRAS9kF3zMbBuZ00Z60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486051137610-6frg3ual1g67m611r6vaq74b2g8u91ac.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

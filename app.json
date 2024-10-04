@@ -22,7 +22,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "rgb(118, 253, 152)"
-      }
+      },
+      "package": "com.prpasn.questioninterview"
     },
     "web": {
       "favicon": "./assets/favicon.png"
